@@ -5,13 +5,16 @@ import cn.vpclub.spring.mail.MockMailSender;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * Created by XTL on 8/14/2014.
  */
 @RestController
 public class Controller {
 
-    private MailSender mailSender = new MockMailSender(); // example of explicit instantiation which is a bad idea.
+    @Resource
+    private MailSender mailSender;  // spring dependency injection with @Resource here and @Component in MockMailSender implementation class
 
     @RequestMapping(value = "/sendmail", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String sendmail(@RequestParam("to") String to, @RequestParam("subject") String subject, @RequestParam("body") String body) {
