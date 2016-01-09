@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 /**
  * Created by johnd on 1/9/16.
  */
-
+@Primary
 @Component
-public class MockMailSender implements MailSender {
-    private static final Logger logger = LoggerFactory.getLogger(MockMailSender.class);
+public class SmtpMailSender implements MailSender {
+    private static final Logger logger = LoggerFactory.getLogger(SmtpMailSender.class);
 
     @Override
     public void send(String to, String subject, String body) {
-        logger.info("Sending mail to: " + to);
+        logger.info("Sending smtp mail to: " + to);
         logger.info("Subject: " + subject);
         logger.info("Body: " + body);
     }

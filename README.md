@@ -40,14 +40,50 @@
     2016-01-09 16:15:29.211  INFO 10574 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
     2016-01-09 16:15:29.294  INFO 10574 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
     2016-01-09 16:15:29.301  INFO 10574 --- [           main] cn.vpclub.Application                    : Started Application in 3.322 seconds (JVM running for 4.109)
+
+# Now, let's learn the spring dependency injection step by step:
+    1. First checkout the source code
+        
+        git checkout 4c9a36b52c31f165ef2bb192c8bada1e268f5dda
+    
+        In this reversion, it demostrating how the primary instantation works, this is not recomanded as the class Controller 
+        depends on MockMailSender, once MockMailSender is changed, the Controller needs to be changed as well, imaging the
+        project contains hundreds and thousands of classes, it will be disaster.
+        
+        In Controller.java
+    
+        private MailSender mailSender = new MockMailSender(); 
+    
+    2. Let's checkout another reversion, see how spring dependecy injection works.
+        
+        git checkout a77572c413377aa4f10098b7be916df1ed8ecfb4
+        
+        Above of the class MockMailSender in MockMailSender.java, add a spring annotation @Component
+        
+        @Component
+        public class MockMailSender implements MailSender {
+        
+        Above of the instantation in Controller.java, add @Resource
+        
+        @RestController
+        public class Controller {
+        
+            @Resource
+            private MailSender mailSender;
+        
+            ...
+        }
+
+# Testing APIs
     
     After stated the application, use curl to check the below APIs,
     
-    curl http://localhost:8080/user?id=3&name=John%20Deng
+    curl "http://localhost:8080/user?id=3&name=John%20Deng"
     
         {"name":"John Deng","id":3}
     
-    curl http://localhost:8080/sendmail?to=john.deng@vpclub.cn&subject=About%20spring%20tutorial&body=Hi%20All,%20let%27s%20have%20a%20training
+    curl "http://localhost:8080/sendmail?to=john.deng@vpclub.cn&subject=About%20spring%20tutorial&body=Hi%20All,%20let%27s%20have%20a%20training"
     
         Mail is sent to john.deng@vpclub.cn successfully!
-
+        
+        
