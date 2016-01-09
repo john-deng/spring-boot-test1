@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
  * Created by johnd on 1/9/16.
  */
 
-@Component
-@Qualifier("mock")
+
 public class MockMailSender implements MailSender {
     private static final Logger logger = LoggerFactory.getLogger(MockMailSender.class);
 

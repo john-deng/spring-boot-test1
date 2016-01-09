@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
  * Created by johnd on 1/9/16.
  */
 
-@Component
-@Qualifier("smtp")
 public class SmtpMailSender implements MailSender {
     private static final Logger logger = LoggerFactory.getLogger(SmtpMailSender.class);
 

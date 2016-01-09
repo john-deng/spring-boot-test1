@@ -19,7 +19,7 @@ public class Controller {
 
     // spring dependency injection with @Autowired here and @Primary, @Component in MockMailSender implementation class
     @Autowired
-    public Controller(@Qualifier("mock") MailSender mailSender) {
+    public Controller(@Qualifier("mockMailSender") MailSender mailSender) {
         this.mailSender = mailSender;
     }
 
