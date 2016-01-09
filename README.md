@@ -5,7 +5,7 @@
 
 #usage
 	git clone https://github.com/john-deng/spring-boot-test1.git
-	Open spring-boot-test1 from IDEA IDE, then run Application.java, you should able to see below messages.
+	Open spring-boot-test1 from IDEA IDE, then run Application.java, you should be able to see below messages.
         
       .   ____          _            __ _ _
      /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -41,8 +41,13 @@
     2016-01-09 16:15:29.294  INFO 10574 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
     2016-01-09 16:15:29.301  INFO 10574 --- [           main] cn.vpclub.Application                    : Started Application in 3.322 seconds (JVM running for 4.109)
     
+    After stated the application, use curl to check the below APIs,
+    
     curl http://localhost:8080/user?id=3&name=John%20Deng
     
-    {"name":"John Deng","id":3}
-
+        {"name":"John Deng","id":3}
+    
+    curl http://localhost:8080/sendmail?to=john.deng@vpclub.cn&subject=About%20spring%20tutorial&body=Hi%20All,%20let%27s%20have%20a%20training
+    
+        Mail is sent to john.deng@vpclub.cn successfully!
 
